@@ -25,7 +25,7 @@ const protected = async (req, res, next) => {
     } catch (err) {
       console.log(err);
       res.status(401);
-      throw new Error({ message: "Not authorized" });
+      throw new Error("Not authorized");
     }
   }
 };
