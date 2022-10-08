@@ -5,6 +5,10 @@ require("dotenv").config();
 const protected = async (req, res, next) => {
   let token;
 
+  if (!req.headers.authorization) {
+    throw new Error("Authorization headers not set");
+  }
+
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
@@ -19,19 +23,18 @@ const protected = async (req, res, next) => {
         [decoded.data.username]
       );
 
-      if(foundUser.rows.length === 0) {
-        throw new Error("User could not be varified")
+      if (foundUser.rows.length === 0) {
+        throw new Error("User could not be varified");
       }
 
-      req.user = foundUser.rows[0]
+      req.user = foundUser.rows[0];
 
       next();
     } catch (error) {
-      console.log(error);
-      res.json({error: error.message})
-      //throw new Error("Not authorized");
+      res.json({ error: error.message });
     }
   }
+  
 };
 
 module.exports = protected;
