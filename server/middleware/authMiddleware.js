@@ -14,20 +14,27 @@ const protected = async (req, res, next) => {
 
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
+      console.log("Decoded VAR: " + decoded)
+
       const foundUser = await db.query(
         "SELECT users.id, users.username, users.email FROM users WHERE users.username = $1",
         [decoded.data.username]
       );
 
+      if(foundUser.rows.length === 0) {
+        throw new Error("User could not be varified")
+      }
+
       req.user = foundUser.rows[0]
 
       next();
-    } catch (err) {
-      console.log(err);
-      res.status(401);
-      throw new Error("Not authorized");
+    } catch (error) {
+      console.log(error);
+      res.json({error: error.message})
+      //throw new Error("Not authorized");
     }
   }
 };
 
 module.exports = protected;
+//
