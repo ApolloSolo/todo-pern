@@ -17,6 +17,7 @@ CREATE TABLE todos(
     due_date DATE NOT NULL DEFAULT CURRENT_DATE,
     days_left INT,
     completed BOOL DEFAULT false,
+    days_ahead INT DEFAULT 0,
     CONSTRAINT FK_user_todo FOREIGN KEY(username)
         REFERENCES users(username)
 );
