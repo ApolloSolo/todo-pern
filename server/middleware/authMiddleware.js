@@ -14,8 +14,6 @@ const protected = async (req, res, next) => {
 
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-      console.log("Decoded VAR: " + decoded)
-
       const foundUser = await db.query(
         "SELECT users.id, users.username, users.email FROM users WHERE users.username = $1",
         [decoded.data.username]
