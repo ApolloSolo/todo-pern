@@ -1,13 +1,20 @@
-const getUserTodos = require("./getUserTodos");
+const {
+  getOutstandingTodos,
+  getAllTodos,
+  getCompleteTodos,
+} = require("./getUserTodos");
 const getOneTodo = require("./getOneTodo");
 const createTodo = require("./createTodo");
-const updateTodo = require("./updateTodo");
+const { editTodo, changeTodoStatus } = require("./updateTodo");
 const deleteTodo = require("./deleteTodo");
 
 module.exports = {
-    getUserTodos,
-    getOneTodo,
-    createTodo,
-    updateTodo,
-    deleteTodo
-}
+  getOutstandingTodos,
+  getAllTodos,
+  getCompleteTodos,
+  changeTodoStatus,
+  getOneTodo,
+  createTodo,
+  editTodo,
+  deleteTodo,
+};
