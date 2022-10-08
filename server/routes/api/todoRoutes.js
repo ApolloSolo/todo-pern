@@ -5,7 +5,7 @@ const {
   createTodo,
   updateTodo,
   deleteTodo,
-} = require("../../controllers/todoControllers");
+} = require("../../controllers/todo");
 const protected = require("../../middleware/authMiddleware");
 
 router.get("/", protected, getUserTodos);

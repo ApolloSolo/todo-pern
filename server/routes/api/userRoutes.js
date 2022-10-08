@@ -5,14 +5,14 @@ const {
   loginUser,
   registerUser,
   deleteUser,
-} = require("../../controllers/userControllers");
+} = require("../../controllers/users");
 const protected = require("../../middleware/authMiddleware");
 
 router.get("/", protected, getAllUsers);
-router.get("/:id", protected, getOneUser);
+router.get("/:username", protected, getOneUser);
 router.post("/login", loginUser);
 router.post("/register", registerUser);
-router.delete("/remove/:id", protected, deleteUser);
+router.delete("/remove", protected, deleteUser);
 
 module.exports = router;
 
