@@ -5,7 +5,6 @@ const { generateToken } = require("../../utils/generateJWT");
 const registerUser = async (req, res) => {
   try {
     const { email, username, password, confirmPassword } = req.body;
-    console.log(email, username, password, confirmPassword);
     if (password != confirmPassword) {
       throw new Error("Your passwords do not match.");
     }
@@ -25,7 +24,6 @@ const registerUser = async (req, res) => {
         "INSERT INTO users(username, email, passhash) VALUES ($1, $2, $3) RETURNING username, email, id",
         [username, email, hashedPass]
       );
-      console.log(newUser.rows[0]);
       res.status(201).json({
         token: generateToken(newUser.rows[0]),
       });
@@ -33,7 +31,6 @@ const registerUser = async (req, res) => {
       res.json({ loggedIn: false, status: "Email or Username already in use" });
     }
   } catch (error) {
-    console.log(error.message);
     res.json({ error: error.message });
   }
 };

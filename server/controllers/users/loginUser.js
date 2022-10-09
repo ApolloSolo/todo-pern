@@ -15,7 +15,6 @@ const loginUser = async (req, res) => {
     if (user.rowCount > 0) {
       const validUser = await bcrypt.compare(password, user.rows[0].passhash);
       if (validUser) {
-        console.log(user.rows[0]);
         res.status(201).json({
           token: generateToken({
             id: user.rows[0].id,
